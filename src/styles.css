@@ -1,0 +1,146 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --card-2: #e2e8f0;
+  --ink: #0f172a;
+  --ink-soft: #52627a;
+  --line: #cbd5e1;
+  --line-thick: #475569;
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+  --given: #0f172a;
+  --filled: #2563eb;
+  --bad: #dc2626;
+  --bad-bg: #fee2e2;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --ok: #15803d;
+  --ok-bg: #dcfce7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0f1a;
+    --card: #131c2b;
+    --card-2: #1b2536;
+    --ink: #e6eef4;
+    --ink-soft: #93a3ba;
+    --line: #2a3648;
+    --line-thick: #6b7d99;
+    --accent: #60a5fa;
+    --accent-ink: #04101f;
+    --given: #f1f5f9;
+    --filled: #60a5fa;
+    --bad: #f87171;
+    --bad-bg: #3a1414;
+    --warn: #fbbf24;
+    --warn-bg: #3a2a0a;
+    --ok: #4ade80;
+    --ok-bg: #0f2f1e;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app { max-width: 520px; margin: 0 auto; padding: 24px 18px 60px; }
+
+header h1 { margin: 0 0 6px; font-size: 1.7rem; letter-spacing: -0.02em; }
+.tag { margin: 0 0 18px; color: var(--ink-soft); font-size: 0.94rem; }
+
+.board-wrap { display: flex; justify-content: center; margin-bottom: 12px; }
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  width: min(100%, 450px);
+  aspect-ratio: 1;
+  background: var(--card);
+  border: 2px solid var(--line-thick);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.cell {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--line);
+  text-align: center;
+  font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+  font-weight: 700;
+  background: var(--card);
+  color: var(--filled);
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+}
+.cell.given { color: var(--given); background: var(--card-2); }
+.cell.conflict { background: var(--bad-bg); color: var(--bad); }
+.cell.filled { color: var(--filled); }
+.cell:nth-child(3n) { border-right: 2px solid var(--line-thick); }
+.cell:nth-child(9n+1) { border-left: none; }
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 2px solid var(--line-thick);
+}
+.cell:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.status { text-align: center; font-size: 0.9rem; margin: 0 0 14px; font-weight: 600; }
+.status.ok { color: var(--ok); }
+.status.warn { color: var(--warn); }
+.status.bad { color: var(--bad); }
+
+.actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.actions button {
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--card);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.actions button:last-child { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 18px; }
+.card h2 { margin: 0 0 6px; font-size: 1rem; }
+.card .muted { margin: 0 0 10px; font-size: 0.83rem; color: var(--ink-soft); }
+.card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+.card button {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card-2);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.explainer { border-top: 1px solid var(--line); padding-top: 20px; color: var(--ink-soft); font-size: 0.94rem; }
+.explainer h2 { color: var(--ink); font-size: 1.15rem; margin: 0 0 10px; }
+.explainer h3 { color: var(--ink); font-size: 1rem; margin: 18px 0 6px; }
+.explainer p { margin: 0 0 10px; }
+.explainer strong { color: var(--ink); }
+.explainer footer { margin-top: 20px; font-size: 0.85rem; opacity: 0.75; }
+
+@media print { .tt-nav { display: none !important; } }
