@@ -144,3 +144,8 @@ header h1 { margin: 0 0 6px; font-size: 1.7rem; letter-spacing: -0.02em; }
 .explainer footer { margin-top: 20px; font-size: 0.85rem; opacity: 0.75; }
 
 @media print { .tt-nav { display: none !important; } }
+
+/* a11y-contrast-fixes (auto, WCAG AA 4.5:1) */
+@media (prefers-color-scheme: light) {
+  .cell.conflict { color: #ca2323; }
+}
